@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class Task extends Component {
     render() {
         return (
-            <div className={"uk-card uk-card-default uk-card-body uk-margin-right" + (this.props.isFirst ? '' : ' uk-margin-top')}>
+            <div className={"uk-card uk-card-default uk-card-body uk-margin-right uk-margin-bottom"}>
                 <div data-uk-grid={"true"}>
                     <div className={"uk-width-expand"}>{this.props.name}</div>
                     {this.props.children}

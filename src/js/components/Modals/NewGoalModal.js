@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {addGoal} from "../../actions";
 import uuidv1 from "uuid";
+import UIkit from 'uikit'
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -40,10 +41,11 @@ class ConnectedNewGoalModal extends Component {
             activity: {},
             uuid: uuidv1(),
         });
+        UIkit.modal('#modal-goal-create').hide();
         this.setState({
             name: '',
             type: 'boolean',
-        })
+        });
     }
 
     render() {
@@ -81,7 +83,7 @@ class ConnectedNewGoalModal extends Component {
                     </form>
                     <p className="uk-text-right">
                         <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-                        <button className="uk-button uk-button-primary uk-modal-close"
+                        <button className="uk-button uk-button-primary"
                                 onClick={this.handleGoalCreate}
                                 type="button">Create</button>
                     </p>
