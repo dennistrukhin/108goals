@@ -16,8 +16,9 @@ export default class Task extends Component {
                                 <li><a href="#">Edit</a></li>
                                 <li><a href="#">Delete</a></li>
                                 <li className="uk-nav-divider"/>
-                                <li className="uk-nav-header">Danger zone</li>
-                                <li><a href={"#"}>Delete this goal</a></li>
+                                <li className="uk-nav-header">Goal</li>
+                                <li><a href={"#"}>Edit</a></li>
+                                <li><a href={"#"}>Delete</a></li>
                             </ul>
                         </div>
                     </div>

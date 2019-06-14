@@ -1,20 +1,30 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import {addGoal} from "../../actions";
+import uuidv1 from "uuid";
 
-export default class NewGoalModal extends Component {
+function mapDispatchToProps(dispatch) {
+    return {
+        addGoal: goal => dispatch(addGoal(goal))
+    };
+}
+
+class ConnectedNewGoalModal extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
+            name: '',
             type: 'boolean',
         };
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
+        this.handleGoalCreate = this.handleGoalCreate.bind(this);
     }
 
     handleTitleChange(event) {
         this.setState({
-            title: event.target.value,
+            name: event.target.value,
         });
     }
 
@@ -22,6 +32,18 @@ export default class NewGoalModal extends Component {
         this.setState({
             type: event.target.value,
         });
+    }
+
+    handleGoalCreate() {
+        this.props.addGoal({
+            ...this.state,
+            activity: {},
+            uuid: uuidv1(),
+        });
+        this.setState({
+            name: '',
+            type: 'boolean',
+        })
     }
 
     render() {
@@ -37,7 +59,7 @@ export default class NewGoalModal extends Component {
                                 <input className="uk-input"
                                        id="mgc-title"
                                        type="text"
-                                       value={this.state.title}
+                                       value={this.state.name}
                                        onChange={this.handleTitleChange}
                                        placeholder="Enter your goal title here" />
                             </div>
@@ -60,7 +82,7 @@ export default class NewGoalModal extends Component {
                     <p className="uk-text-right">
                         <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
                         <button className="uk-button uk-button-primary uk-modal-close"
-                                onClick={() => this.props.onGoalCreate(this.state)}
+                                onClick={this.handleGoalCreate}
                                 type="button">Create</button>
                     </p>
                 </div>
@@ -68,3 +90,6 @@ export default class NewGoalModal extends Component {
         );
     }
 }
+
+const NewGoalModal = connect(null, mapDispatchToProps)(ConnectedNewGoalModal);
+export default NewGoalModal;

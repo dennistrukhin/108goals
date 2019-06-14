@@ -2,16 +2,21 @@ import React, {Component} from 'react';
 import DataView from "./Views/DataView";
 import MainMenu from "./MainMenu";
 import NewGoalModal from "./Modals/NewGoalModal";
+import {connect} from "react-redux";
+import {getData} from "../actions";
 
-export default class App extends Component {
+const mapStateToProps = state => {
+    return {};
+};
+
+class ConnectedApp extends Component {
 
     constructor(props) {
         super(props);
-        this.handleGoalCreate = this.handleGoalCreate.bind(this);
     }
 
-    handleGoalCreate(goal) {
-        console.log(goal);
+    componentDidMount() {
+        this.props.getData();
     }
 
     render() {
@@ -25,8 +30,11 @@ export default class App extends Component {
                         <DataView />
                     </div>
                 </div>
-                <NewGoalModal onGoalCreate={this.handleGoalCreate} />
+                <NewGoalModal />
             </div>
         );
     }
 }
+
+const App = connect(mapStateToProps, { getData })(ConnectedApp);
+export default App;

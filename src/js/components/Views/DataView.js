@@ -6,7 +6,7 @@ import TimeTask from "../Tasks/TimeTask";
 import DateLabels from "./DateLabels";
 
 const mapStateToProps = state => {
-    return {tasks: state.tasks};
+    return {goals: state.goals};
 };
 
 class ConnectedDataView extends Component {
@@ -39,7 +39,7 @@ class ConnectedDataView extends Component {
             <>
                 <DateLabels offset={this.state.offset} offsetInc={this.offsetInc} offsetDec={this.offsetDec}/>
                 <div data-uk-sortable={"true"}>
-                    {this.props.tasks.map((el, index) => {
+                    {this.props.goals.map((el, index) => {
                         switch (el.type) {
                             case 'boolean':
                                 return (

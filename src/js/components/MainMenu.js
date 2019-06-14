@@ -20,8 +20,8 @@ export default class MainMenu extends Component {
                             </a>
                         </li>
                     </ul>
-                    <div className={"uk-position-bottom uk-text-center uk-text-small uk-margin-bottom"}>Made in 2019 by
-                        Dennis Trukhin
+                    <div className={"uk-position-bottom uk-text-center uk-text-small uk-margin-bottom"}>
+                        Made in 2019<br />by Dennis Trukhin
                     </div>
                 </div>
             </div>
