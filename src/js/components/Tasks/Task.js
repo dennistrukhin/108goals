@@ -9,8 +9,16 @@ export default class Task extends Component {
                     {this.props.children}
                     <div className={"uk-width-auto"}>
                         <span data-uk-icon="more"/>
-                        <div data-uk-dropdown="pos: left-center; mode: click">
-                            <button className={"uk-button uk-button-default uk-button-small"}>Record activity</button>
+                        <div data-uk-dropdown="pos: left-top; mode: click">
+                            <ul className="uk-nav uk-dropdown-nav">
+                                <li className="uk-nav-header">Activities</li>
+                                <li><a href="#">Add</a></li>
+                                <li><a href="#">Edit</a></li>
+                                <li><a href="#">Delete</a></li>
+                                <li className="uk-nav-divider"/>
+                                <li className="uk-nav-header">Danger zone</li>
+                                <li><a href={"#"}>Delete this goal</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
