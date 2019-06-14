@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
-import {addArticle} from "./../actions/index";
-import DataView from "./DataView";
+import DataView from "./Views/DataView";
 import MainMenu from "./MainMenu";
-import TimeTask from "./Tasks/TimeTask";
-import YesNoTask from "./Tasks/YesNoTask";
-import Task from "./Tasks/Task";
 
 export default class App extends Component {
     render() {
@@ -15,7 +11,7 @@ export default class App extends Component {
                         <div className={"uk-width-1-5"}>
                             <MainMenu/>
                         </div>
-                        <div className={"uk-width-4-5"} data-uk-sortable={"true"}>
+                        <div className={"uk-width-4-5"}>
                             <DataView />
                         </div>
                     </div>

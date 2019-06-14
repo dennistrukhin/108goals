@@ -10,7 +10,7 @@ function getDateLabels(offset) {
         );
     }
 
-    return [dates, dateLabels];
+    return dateLabels;
 }
 
 function getPreviousDates(offset) {

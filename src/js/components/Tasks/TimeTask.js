@@ -12,7 +12,8 @@ export default class TimeTask extends Component {
                         <div data-uk-grid={"true"}>
                             {dates.slice(shift, shift + 4).map(date => (
                                 date in this.props.data
-                                    ? (<div key={date} className={"uk-width-1-4"}>{this.props.data[date][0].toString() + ':' + this.props.data[date][1].toString().padStart(2, '0')}</div>)
+                                    ? (<div key={date}
+                                            className={"uk-width-1-4"}>{this.props.data[date][0].toString() + ':' + this.props.data[date][1].toString().padStart(2, '0')}</div>)
                                     : (<div key={date} className={"uk-width-1-4"}/>)
                             ))}
                         </div>
