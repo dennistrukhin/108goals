@@ -13,10 +13,16 @@ export default class MainMenu extends Component {
                         <li><a href="#"><span className="uk-margin-small-right"
                                               data-uk-icon="icon: image"/> Graph view</a></li>
                         <li className="uk-nav-divider"/>
-                        <li><a href="#"><span className="uk-margin-small-right"
-                                              data-uk-icon="icon: plus"/> Create a goal</a></li>
+                        <li>
+                            <a href="#" data-uk-toggle="target: #modal-goal-create">
+                                <span className="uk-margin-small-right" data-uk-icon="icon: plus"/>
+                                Create a goal
+                            </a>
+                        </li>
                     </ul>
-                    <div className={"uk-position-bottom uk-text-center uk-text-small uk-margin-bottom"}>Made in 2019 by Dennis Trukhin</div>
+                    <div className={"uk-position-bottom uk-text-center uk-text-small uk-margin-bottom"}>Made in 2019 by
+                        Dennis Trukhin
+                    </div>
                 </div>
             </div>
         );
