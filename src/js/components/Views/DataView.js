@@ -43,13 +43,13 @@ class ConnectedDataView extends Component {
                         switch (el.type) {
                             case 'boolean':
                                 return (
-                                    <Task name={el.name} key={el.uuid} isFirst={index === 0}>
+                                    <Task goal={el} key={el.uuid}>
                                         <YesNoTask data={el.activity} offset={this.state.offset}/>
                                     </Task>
                                 );
                             case 'time':
                                 return (
-                                    <Task name={el.name} key={el.uuid}>
+                                    <Task goal={el} key={el.uuid}>
                                         <TimeTask data={el.activity} offset={this.state.offset}/>
                                     </Task>
                                 );

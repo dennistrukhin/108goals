@@ -1,8 +1,17 @@
-import {ADD_GOAL} from "../constants/action-types";
+import {ADD_GOAL, DELETE_GOAL, SET_ACTIVE_GOAL_ID} from "../constants/action-types";
 
 export function addGoal(payload) {
     localStorage.setItem('goal-' + payload.uuid, JSON.stringify(payload));
     return { type: ADD_GOAL, payload }
+}
+
+export function deleteGoal(id) {
+    localStorage.removeItem('goal-' + id);
+    return { type: DELETE_GOAL, uuid: id }
+}
+
+export function setActiveGoalId(id) {
+    return { type: SET_ACTIVE_GOAL_ID, uuid: id }
 }
 
 export function getData() {

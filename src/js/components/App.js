@@ -4,6 +4,7 @@ import MainMenu from "./MainMenu";
 import NewGoalModal from "./Modals/NewGoalModal";
 import {connect} from "react-redux";
 import {getData} from "../actions";
+import DeleteGoalModal from "./Modals/DeleteGoalModal";
 
 const mapStateToProps = state => {
     return {};
@@ -31,6 +32,7 @@ class ConnectedApp extends Component {
                     </div>
                 </div>
                 <NewGoalModal />
+                <DeleteGoalModal />
             </div>
         );
     }
