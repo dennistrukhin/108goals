@@ -80,6 +80,8 @@ class ConnectedNewGoalModal extends Component {
                             </div>
                         </div>
 
+                        {}
+
                     </form>
                     <p className="uk-text-right">
                         <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>

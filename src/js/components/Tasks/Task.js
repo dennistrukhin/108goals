@@ -30,11 +30,6 @@ class ConnectedTask extends Component {
                         <span data-uk-icon="more"/>
                         <div data-uk-dropdown="pos: left-top; mode: click">
                             <ul className="uk-nav uk-dropdown-nav">
-                                <li className="uk-nav-header">Activities</li>
-                                <li><a href="#">Add</a></li>
-                                <li><a href="#">Edit</a></li>
-                                <li><a href="#">Delete</a></li>
-                                <li className="uk-nav-divider"/>
                                 <li className="uk-nav-header">Goal</li>
                                 <li><a href={"#"}>Edit</a></li>
                                 <li><a href={"#"} data-uk-toggle="target: #modal-goal-delete" onClick={() => this.handleOpenDeleteGoalModal(this.props.goal)}>Delete</a></li>
