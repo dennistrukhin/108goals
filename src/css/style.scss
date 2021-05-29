@@ -49,6 +49,9 @@ a {
         width: 14.2%;
         float: right;
         text-align: center;
+        a span {
+            color: $primaryColor;
+        }
     }
     .logo {
         margin: 0 20%;
@@ -117,5 +120,19 @@ a {
                 }
             }
         }
+    }
+}
+
+.no-goals {
+    text-align: center;
+    margin-top: 200px;
+    .h1 {
+        font-size: 24px;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+    }
+    p {
+        //text-transform: uppercase;
+        font-weight: 200;
     }
 }

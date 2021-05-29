@@ -7,9 +7,7 @@ import DateLabels from "./DateLabels";
 import {setActiveDate, setActiveGoalId} from "../../actions";
 import {offsetToDate} from "../../utils";
 import AddYesNoActivity from "../Modals/AddYesNoActivityModal";
-import UIkit from "uikit";
 import AddTimeActivity from "../Modals/AddTimeActivityModal";
-import {Link} from "react-router-dom";
 
 const mapStateToProps = state => {
     return {
@@ -36,15 +34,15 @@ class ConnectedDataView extends Component {
     handleAddActivity(goal, offset, type) {
         this.props.setActiveGoalId(goal.uuid);
         this.props.setActiveDate(offsetToDate(offset));
-        UIkit.modal('#modal-goal-add-' + type + '-activity').show();
     }
 
     render() {
         return (
             <>
+                {this.props.goals.length > 0 &&
                 <div className="dates top-level">
                     <DateLabels/>
-                </div>
+                </div>}
                 <div data-uk-sortable={"true"} className={"goals top-level"}>
                     {this.props.goals.map((el) => {
                         switch (el.type) {
@@ -64,12 +62,22 @@ class ConnectedDataView extends Component {
                                 );
                         }
                     })}
+                    {this.props.goals.length === 0 && (
+                        <React.Fragment>
+                            <div className={"no-goals"}>
+                                <div className={"h1"}>Hi there!</div>
+                                <p>Looks like you haven't created any goals yet.</p>
+                                <p>Click or tap on the plus sign in the top right corner to get started.</p>
+                            </div>
+                        </React.Fragment>
+                    )}
                 </div>
-                <AddYesNoActivity/>
-                <AddTimeActivity/>
+                {/*<AddYesNoActivity/>*/}
+                {/*<AddTimeActivity/>*/}
             </>
         );
     }
+
 }
 
 const DataView = connect(mapStateToProps, mapDispatchToProps)(ConnectedDataView);

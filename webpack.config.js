@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
     entry: ['./src/index.js'],
@@ -34,11 +35,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
         }),
-
-        // new HtmlWebPackPlugin({
-        //     favicon: "./src/ico/favicon.png",
-        //     filename: "favicon.png"
-        // })
+        new FaviconsWebpackPlugin('./src/ico/favicon.png')
     ],
     devServer: {
         historyApiFallback: {
