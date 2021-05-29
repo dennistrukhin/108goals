@@ -5,6 +5,8 @@ import NewGoalModal from "./Modals/NewGoalModal";
 import {connect} from "react-redux";
 import {getData} from "../actions";
 import DeleteGoalModal from "./Modals/DeleteGoalModal";
+import * as Router from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const mapStateToProps = state => {
     return {};
@@ -23,20 +25,28 @@ class ConnectedApp extends Component {
     render() {
         return (
             <div>
-                <div data-uk-grid={"true"} className={"uk-grid-small"}>
-                    <div className={"uk-width-1-5"}>
-                        <MainMenu/>
+                <Router.BrowserRouter>
+                    <div className="top-bar top-level">
+                        <Router.Route exact path={"/"}>
+                            <div className="new">
+                                <Link to={'/goal/new'}><span
+                                    data-uk-icon="icon: plus-circle"/></Link>
+                            </div>
+                        </Router.Route>
+                        <div className="logo">42 goals</div>
                     </div>
-                    <div className={"uk-width-4-5"}>
-                        <DataView />
-                    </div>
-                </div>
-                <NewGoalModal />
-                <DeleteGoalModal />
+                    <Router.Route exact path={"/"}>
+                        <DataView/>
+                    </Router.Route>
+                    <Router.Route exact path={"/goal/new"}>
+                        <NewGoalModal/>
+                    </Router.Route>
+                    <DeleteGoalModal/>
+                </Router.BrowserRouter>
             </div>
         );
     }
 }
 
-const App = connect(mapStateToProps, { getData })(ConnectedApp);
+const App = connect(mapStateToProps, {getData})(ConnectedApp);
 export default App;

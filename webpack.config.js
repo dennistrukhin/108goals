@@ -1,9 +1,13 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+    entry: ['./src/index.js'],
     output: {
         path: __dirname + '/docs',
         publicPath: '/',
+        filename: '[name].[contenthash].js',
+        chunkFilename: '[id].[chunkhash].js',
     },
     module: {
         rules: [
@@ -15,19 +19,26 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                test: /\.s[ac]ss|css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
+
+
         ],
     },
     plugins: [
         new HtmlWebPackPlugin({
             template: "./src/index.html",
-            filename: "./index.html"
+            filename: "index.html"
         }),
-        new HtmlWebPackPlugin({
-            favicon: "./src/ico/favicon.png"
-        })
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+        }),
+
+        // new HtmlWebPackPlugin({
+        //     favicon: "./src/ico/favicon.png",
+        //     filename: "favicon.png"
+        // })
     ],
     devServer: {
         historyApiFallback: {

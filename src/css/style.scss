@@ -1,0 +1,121 @@
+$primaryColor: #f57900;
+
+.clearfix {
+    clear: both;
+    float: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #222;
+    //font-weight: 200;
+}
+
+a {
+    color: $primaryColor;
+}
+
+@media screen and (min-width: 960px) {
+    .top-level {
+        padding-left: calc((100vw - 960px) / 2);
+        padding-right: calc((100vw - 960px) / 2);
+    }
+}
+@media screen and (max-width: 959px) {
+    .top-level {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+
+.top-bar {
+    border-top: 2px solid $primaryColor;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: $primaryColor;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 36px;
+    padding-top: 12px;
+    .left, .right {
+        width: 14.2%;
+        float: left;
+        text-align: center;
+    }
+    .new {
+        width: 14.2%;
+        float: right;
+        text-align: center;
+    }
+    .logo {
+        margin: 0 20%;
+    }
+}
+
+.dates {
+    background: #f2f2f2;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    .labels {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        > div {
+            display: table-cell;
+            &.holiday {
+                .dow, .day {
+                    font-weight: 500;
+                    color: #000;
+                }
+            }
+            .dow, .day {
+                text-align: center;
+            }
+            .dow {
+                font-weight: 200;
+                font-size: 12px;
+            }
+            .day {
+                font-weight: 100;
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+.goals {
+    .goal {
+        margin-top: 40px;
+        .name {
+            font-size: 12px;
+            font-weight: 200;
+            text-transform: uppercase;
+            color: #000;
+            text-align: center;
+            margin: 0 15%;
+        }
+        .actions {
+            float: right;
+            width: 14.2%;
+            text-align: center;
+            color: #666;
+            line-height: 1;
+        }
+        .results {
+            margin-top: 8px;
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+            .result {
+                display: table-cell;
+                text-align: center;
+                &.empty {
+                    color: #c2c2c2;
+                }
+            }
+        }
+    }
+}

@@ -1,13 +1,24 @@
 function getDateLabels(offset) {
     let dateLabels = [];
     let rightmostDate;
-    for (let i = 7; i >= 0; i--) {
+    const days = [
+        'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT',
+    ]
+    for (let i = 6; i >= 0; i--) {
         rightmostDate = new Date();
         rightmostDate.setDate(rightmostDate.getDate() - offset - i);
-        dateLabels.push(
-            rightmostDate.getDate().toString().padStart(2, '0') + '.' +
-            (rightmostDate.getMonth() + 1).toString().padStart(2, '0')
-        );
+        const paddedMonth = (rightmostDate.getMonth() + 1).toString().padStart(2, '0');
+        const paddedDay = rightmostDate.getDate().toString().padStart(2, '0');
+        const formattedDate = paddedDay + '.' + paddedMonth;
+        const day = rightmostDate.getDay();
+        const dow = days[day];
+        const isHoliday = day === 0 || day === 6;
+        dateLabels.push({
+            formatted: formattedDate,
+            day: paddedDay,
+            dow: dow,
+            isHoliday: isHoliday,
+        });
     }
 
     return dateLabels;
@@ -16,7 +27,7 @@ function getDateLabels(offset) {
 function getPreviousDates(offset) {
     let dates = [];
     let rightmostDate;
-    for (let i = 7; i >= 0; i--) {
+    for (let i = 6; i >= 0; i--) {
         rightmostDate = new Date();
         rightmostDate.setDate(rightmostDate.getDate() - offset - i);
         dates.push(

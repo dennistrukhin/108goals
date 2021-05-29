@@ -22,20 +22,12 @@ class ConnectedTask extends Component {
 
     render() {
         return (
-            <div className={"uk-card uk-card-default uk-card-body uk-margin-right uk-margin-bottom"}>
+            <div className={"goal"}>
+                <div className={"actions"}><span data-uk-icon="icon: more; ratio: 0.7"/></div>
+                <div className={"name"}>{this.props.goal['name']}</div>
+                <div className="clearfix"/>
                 <div data-uk-grid={"true"}>
-                    <div className={"uk-width-expand"}>{this.props.goal['name']}</div>
                     {this.props.children}
-                    <div className={"uk-width-auto"}>
-                        <span data-uk-icon="more"/>
-                        <div data-uk-dropdown="pos: left-top; mode: click">
-                            <ul className="uk-nav uk-dropdown-nav">
-                                <li className="uk-nav-header">Goal</li>
-                                <li><a href={"#"}>Edit</a></li>
-                                <li><a href={"#"} data-uk-toggle="target: #modal-goal-delete" onClick={() => this.handleOpenDeleteGoalModal(this.props.goal)}>Delete</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         );

@@ -1,34 +1,68 @@
 import React, {Component} from 'react';
 import {getDateLabels} from "../../utils";
+import {decDateOffset, incDateOffset, setActiveDate, setActiveGoalId} from "../../actions";
+import {connect} from "react-redux";
 
-export default class DateLabels extends Component {
+const mapStateToProps = state => {
+    return {
+        goals: state.goals,
+        activeGoalId: state.activeGoalId,
+        activeDate: state.activeDate,
+        offset: state.offset,
+    };
+};
+
+function mapDispatchToProps(dispatch) {
+    return {
+        setActiveGoalId: id => dispatch(setActiveGoalId(id)),
+        setActiveDate: date => dispatch(setActiveDate(date)),
+        incDateOffset: () => dispatch(incDateOffset()),
+        decDateOffset: () => dispatch(decDateOffset()),
+    };
+}
+
+class ConnectedDateLabels extends Component {
+    constructor(props) {
+        super(props);
+
+        this.offsetInc = this.offsetInc.bind(this);
+        this.offsetDec = this.offsetDec.bind(this);
+    }
+
+    offsetInc(event) {
+        this.props.incDateOffset();
+        event.preventDefault();
+    }
+
+    offsetDec(event) {
+        event.preventDefault();
+        this.props.decDateOffset();
+    }
+
     render() {
         const labels = getDateLabels(this.props.offset);
         return (
-            <div className="uk-card uk-card uk-card-body uk-margin-right">
-                <div data-uk-grid={"true"}>
-                    <div className={"uk-width-expand uk-text-right"}>
-                        <a href="#" onClick={this.props.offsetInc}><span data-uk-icon="chevron-left"/></a>
+            <div className={"labels"}>
+                {/*<div>*/}
+                {/*    <a href="#" onClick={this.offsetInc}><span data-uk-icon="chevron-left"/></a>*/}
+                {/*</div>*/}
+
+                {labels.map(label => (
+                    <div key={label.formatted} className={label.isHoliday ? 'holiday' : ''}>
+                        <div className={'dow'}>{label.dow}</div>
+                        <div className={'day'}>{label.day}</div>
                     </div>
-                    {[0, 4].map(shift => {
-                        return (
-                            <div key={shift} className={"uk-width-1-3"}>
-                                <div data-uk-grid={"true"}>
-                                    {labels.slice(shift, shift + 4).map(label => (
-                                        <div key={label} className={"uk-width-1-4"}>{label}</div>
-                                    ))}
-                                </div>
-                            </div>
-                        );
-                    })}
-                    <div className={"uk-width-auto"}>
-                        {this.props.offset > 0
-                            ? <a href="#" onClick={this.props.offsetDec}><span data-uk-icon="chevron-right"/></a>
-                            : <span data-uk-icon="chevron-right"/>
-                        }
-                    </div>
-                </div>
+                ))}
+                {/*<div>*/}
+                {/*    {this.props.offset > 0*/}
+                {/*        ? <a href="#" onClick={this.offsetDec}><span data-uk-icon="chevron-right"/></a>*/}
+                {/*        : <span data-uk-icon="chevron-right"/>*/}
+                {/*    }*/}
+                {/*</div>*/}
             </div>
         );
     }
 }
+
+const DateLabels = connect(mapStateToProps, mapDispatchToProps)(ConnectedDateLabels)
+export default DateLabels;

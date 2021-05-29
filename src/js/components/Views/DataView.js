@@ -9,46 +9,28 @@ import {offsetToDate} from "../../utils";
 import AddYesNoActivity from "../Modals/AddYesNoActivityModal";
 import UIkit from "uikit";
 import AddTimeActivity from "../Modals/AddTimeActivityModal";
+import {Link} from "react-router-dom";
 
 const mapStateToProps = state => {
     return {
         goals: state.goals,
         activeGoalId: state.activeGoalId,
-        activeDate: state.activeDate
+        activeDate: state.activeDate,
+        offset: state.offset,
     };
 };
 
 function mapDispatchToProps(dispatch) {
     return {
         setActiveGoalId: id => dispatch(setActiveGoalId(id)),
-        setActiveDate: date => dispatch(setActiveDate(date))
+        setActiveDate: date => dispatch(setActiveDate(date)),
     };
 }
 
 class ConnectedDataView extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            offset: 0,
-        };
-
-        this.offsetInc = this.offsetInc.bind(this);
-        this.offsetDec = this.offsetDec.bind(this);
         this.handleAddActivity = this.handleAddActivity.bind(this);
-    }
-
-    offsetInc(event) {
-        event.preventDefault();
-        this.setState({
-            offset: this.state.offset + 1,
-        });
-    }
-
-    offsetDec(event) {
-        event.preventDefault();
-        this.setState({
-            offset: Math.max(0, this.state.offset - 1),
-        });
     }
 
     handleAddActivity(goal, offset, type) {
@@ -60,27 +42,31 @@ class ConnectedDataView extends Component {
     render() {
         return (
             <>
-                <DateLabels offset={this.state.offset} offsetInc={this.offsetInc} offsetDec={this.offsetDec}/>
-                <div data-uk-sortable={"true"}>
+                <div className="dates top-level">
+                    <DateLabels/>
+                </div>
+                <div data-uk-sortable={"true"} className={"goals top-level"}>
                     {this.props.goals.map((el) => {
                         switch (el.type) {
                             case 'boolean':
                                 return (
                                     <Task goal={el} key={el.uuid}>
-                                        <YesNoTask data={el.activity} offset={this.state.offset} addActivity={(offset) => this.handleAddActivity(el, offset, el.type)}/>
+                                        <YesNoTask data={el.activity} offset={this.props.offset}
+                                                   addActivity={(offset) => this.handleAddActivity(el, offset, el.type)}/>
                                     </Task>
                                 );
                             case 'time':
                                 return (
                                     <Task goal={el} key={el.uuid}>
-                                        <TimeTask data={el.activity} offset={this.state.offset} addActivity={(offset) => this.handleAddActivity(el, offset, el.type)}/>
+                                        <TimeTask data={el.activity} offset={this.props.offset}
+                                                  addActivity={(offset) => this.handleAddActivity(el, offset, el.type)}/>
                                     </Task>
                                 );
                         }
                     })}
                 </div>
-                <AddYesNoActivity />
-                <AddTimeActivity />
+                <AddYesNoActivity/>
+                <AddTimeActivity/>
             </>
         );
     }

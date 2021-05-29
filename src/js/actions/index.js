@@ -1,4 +1,11 @@
-import {ADD_GOAL, DELETE_GOAL, SAVE_GOAL, SET_ACTIVE_DATE, SET_ACTIVE_GOAL_ID} from "../constants/action-types";
+import {
+    ADD_GOAL,
+    DELETE_GOAL,
+    SAVE_GOAL,
+    SET_ACTIVE_DATE,
+    SET_ACTIVE_GOAL_ID,
+    SET_OFFSET
+} from "../constants/action-types";
 
 export function addGoal(payload) {
     localStorage.setItem('goal-' + payload.uuid, JSON.stringify(payload));
@@ -33,4 +40,26 @@ export function getData() {
         }
         dispatch({ type: "DATA_LOADED", payload: payload })
     };
+}
+
+export function incDateOffset() {
+    return function (dispatch, getState) {
+        const existingOffset = getState()['offset'];
+        return dispatch({
+            type: SET_OFFSET,
+            payload: existingOffset + 1,
+        })
+    }
+}
+
+export function decDateOffset() {
+    return function (dispatch, getState) {
+        const existingOffset = getState()['offset'];
+        if (existingOffset > 0) {
+            return dispatch({
+                type: SET_OFFSET,
+                payload: existingOffset - 1,
+            })
+        }
+    }
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 
 export default class MainMenu extends Component {
     render() {
@@ -14,10 +15,7 @@ export default class MainMenu extends Component {
                                               data-uk-icon="icon: image"/> Graph view</a></li>
                         <li className="uk-nav-divider"/>
                         <li>
-                            <a href="#" data-uk-toggle="target: #modal-goal-create">
-                                <span className="uk-margin-small-right" data-uk-icon="icon: plus"/>
-                                Create a goal
-                            </a>
+
                         </li>
                     </ul>
                     <div className={"uk-position-bottom uk-text-center uk-text-small uk-margin-bottom"}>
