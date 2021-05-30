@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import DataView from "./Views/DataView";
-import NewGoalModal from "./Modals/NewGoalModal";
 import {connect} from "react-redux";
 import {getData} from "../actions";
-import DeleteGoalModal from "./Modals/DeleteGoalModal";
 import * as Router from "react-router-dom";
 import TopBar from "./TopBar";
+import NewGoal from "./NewGoal";
 
 const mapStateToProps = state => {
     return {};
@@ -23,17 +22,15 @@ class ConnectedApp extends Component {
 
     render() {
         return (
-            <div>
-                <Router.BrowserRouter>
-                    <TopBar/>
-                    <Router.Route exact path={"/"}>
-                        <DataView/>
-                    </Router.Route>
-                    <Router.Route exact path={"/goal/new"}>
-                        <NewGoalModal/>
-                    </Router.Route>
-                </Router.BrowserRouter>
-            </div>
+            <Router.BrowserRouter>
+                <TopBar/>
+                <Router.Route exact path={"/"}>
+                    <DataView/>
+                </Router.Route>
+                <Router.Route path={"/goal/new"}>
+                    <NewGoal/>
+                </Router.Route>
+            </Router.BrowserRouter>
         );
     }
 }

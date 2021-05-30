@@ -9,7 +9,7 @@ const mapStateToProps = state => {
     };
 };
 
-function ConnectedYesNoTask(props) {
+function ConnectedXTimesAWeekTask(props) {
     const dates = getPreviousDates(props.offset);
     const activity = props.goal.activity;
 
@@ -21,13 +21,11 @@ function ConnectedYesNoTask(props) {
                     goalId={props.goal.uuid}
                     empty={!(date in activity)}
                     date={date}
-                    value={date in activity ? activity[date]
-                        ? <span className="uk-label uk-label-success">YES</span>
-                        : <span className="uk-label uk-label-danger">NO</span> : ''}/>
+                    value={date in activity ? activity[date].toString() : ''}/>
             ))}
         </div>
     );
 }
 
-const YesNoTask = connect(mapStateToProps)(ConnectedYesNoTask);
-export default YesNoTask;
+const XTimesAWeekTask = connect(mapStateToProps)(ConnectedXTimesAWeekTask);
+export default XTimesAWeekTask;

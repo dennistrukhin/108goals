@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import store from "./js/store/index";
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
-import './css/style.scss';
+import './css/style.less';
 
 UIkit.use(Icons);
 
