@@ -1,6 +1,6 @@
 import {
     ADD_GOAL,
-    DELETE_GOAL,
+    DELETE_GOAL, GOALS_LOADED,
     SAVE_GOAL,
     SET_ACTIVE_DATE,
     SET_ACTIVE_GOAL_ID,
@@ -8,7 +8,10 @@ import {
 } from "../constants/action-types";
 
 export function addGoal(payload) {
-    localStorage.setItem('goal-' + payload.uuid, JSON.stringify(payload));
+    const str = localStorage.getItem('goals') || "[]";
+    const goals = JSON.parse(str);
+    goals.push(payload);
+    localStorage.setItem('goals', JSON.stringify(goals));
     return { type: ADD_GOAL, payload }
 }
 
@@ -22,23 +25,11 @@ export function saveGoal(payload) {
     return { type: SAVE_GOAL, payload: payload }
 }
 
-export function setActiveGoalId(id) {
-    return { type: SET_ACTIVE_GOAL_ID, uuid: id }
-}
-
-export function setActiveDate(date) {
-    return { type: SET_ACTIVE_DATE, date: date }
-}
-
-export function getData() {
+export function loadGoals() {
     return function(dispatch) {
-        let payload = [];
-        for (const key in localStorage) {
-            if (key.substr(0, 5) === 'goal-') {
-                payload.push(JSON.parse(localStorage.getItem(key)));
-            }
-        }
-        dispatch({ type: "DATA_LOADED", payload: payload })
+        const payloadString = localStorage.getItem('goals') || "[]";
+        const payload = JSON.parse(payloadString);
+        dispatch({ type: GOALS_LOADED, payload: payload })
     };
 }
 

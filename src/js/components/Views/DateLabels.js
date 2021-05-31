@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {getDateLabels} from "../../utils";
-import {decDateOffset, incDateOffset, setActiveDate, setActiveGoalId} from "../../actions";
 import {connect} from "react-redux";
 
 const mapStateToProps = state => {
@@ -14,54 +13,44 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setActiveGoalId: id => dispatch(setActiveGoalId(id)),
-        setActiveDate: date => dispatch(setActiveDate(date)),
-        incDateOffset: () => dispatch(incDateOffset()),
-        decDateOffset: () => dispatch(decDateOffset()),
+        // incDateOffset: () => dispatch(incDateOffset()),
+        // decDateOffset: () => dispatch(decDateOffset()),
     };
 }
 
-class ConnectedDateLabels extends Component {
-    constructor(props) {
-        super(props);
+function ConnectedDateLabels(props) {
 
-        this.offsetInc = this.offsetInc.bind(this);
-        this.offsetDec = this.offsetDec.bind(this);
-    }
+    // const offsetInc = event => {
+    //     props.incDateOffset();
+    //     event.preventDefault();
+    // }
+    //
+    // const offsetDec = event => {
+    //     event.preventDefault();
+    //     props.decDateOffset();
+    // }
+    const labels = getDateLabels(props.offset);
 
-    offsetInc(event) {
-        this.props.incDateOffset();
-        event.preventDefault();
-    }
+    return (
+        <div className={"labels"}>
+            {/*<div>*/}
+            {/*    <a href="#" onClick={offsetInc}><span data-uk-icon="chevron-left"/></a>*/}
+            {/*</div>*/}
 
-    offsetDec(event) {
-        event.preventDefault();
-        this.props.decDateOffset();
-    }
-
-    render() {
-        const labels = getDateLabels(this.props.offset);
-        return (
-            <div className={"labels"}>
-                {/*<div>*/}
-                {/*    <a href="#" onClick={this.offsetInc}><span data-uk-icon="chevron-left"/></a>*/}
-                {/*</div>*/}
-
-                {labels.map(label => (
-                    <div key={label.formatted} className={label.isHoliday ? 'holiday' : ''}>
-                        <div className={'dow'}>{label.dow}</div>
-                        <div className={'day'}>{label.day}</div>
-                    </div>
-                ))}
-                {/*<div>*/}
-                {/*    {this.props.offset > 0*/}
-                {/*        ? <a href="#" onClick={this.offsetDec}><span data-uk-icon="chevron-right"/></a>*/}
-                {/*        : <span data-uk-icon="chevron-right"/>*/}
-                {/*    }*/}
-                {/*</div>*/}
-            </div>
-        );
-    }
+            {labels.map(label => (
+                <div key={label.formatted} className={label.isHoliday ? 'holiday' : ''}>
+                    <div className={'dow'}>{label.dow}</div>
+                    <div className={'day'}>{label.day}</div>
+                </div>
+            ))}
+            {/*<div>*/}
+            {/*    {this.props.offset > 0*/}
+            {/*        ? <a href="#" onClick={offsetDec}><span data-uk-icon="chevron-right"/></a>*/}
+            {/*        : <span data-uk-icon="chevron-right"/>*/}
+            {/*    }*/}
+            {/*</div>*/}
+        </div>
+    );
 }
 
 const DateLabels = connect(mapStateToProps, mapDispatchToProps)(ConnectedDateLabels)

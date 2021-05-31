@@ -1,3 +1,5 @@
+export const GOALS_LOADED = "GOALS_LOADED";
+
 export const ADD_GOAL = "ADD_GOAL";
 export const DELETE_GOAL = "DELETE_GOAL";
 export const SAVE_GOAL = "SAVE_GOAL";

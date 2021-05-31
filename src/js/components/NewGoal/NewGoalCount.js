@@ -11,22 +11,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 function ConnectedNewGoalXTimes(props) {
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         name: '',
-    //         type: 'boolean',
-    //     };
-    //     this.handleTitleChange = this.handleTitleChange.bind(this);
-    //     this.handleTypeChange = this.handleTypeChange.bind(this);
-    //     this.handleGoalCreate = this.handleGoalCreate.bind(this);
-    // }
-
     const [name, setName] = React.useState("");
     const [target, setTarget] = React.useState(0);
     const [success, setSuccess] = React.useState(false);
-
 
     function handleGoalCreate() {
         props.addGoal({
