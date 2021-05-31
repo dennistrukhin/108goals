@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Router from 'react-router-dom';
 import {connect} from "react-redux";
-import {addGoal} from "../actions";
+import {addGoal} from "../../actions";
 import {v1} from "uuid";
 
 function mapDispatchToProps(dispatch) {

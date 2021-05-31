@@ -1,11 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
-import Task from "../Tasks/Task";
-import YesNoTask from "../Tasks/YesNoTask";
-import TimeOfDayTask from "../Tasks/TimeOfDayTask";
+import Goal from "../Goals/Goal";
+import YesNoTask from "../Goals/YesNoTask";
+import TimeOfDayTask from "../Goals/TimeOfDayTask";
 import DateLabels from "./DateLabels";
-import XTimesAWeekTask from "../Tasks/XTimesAWeekTask";
-import CountTask from "../Tasks/CountTask";
+import XTimesAWeekTask from "../Goals/XTimesAWeekTask";
+import CountTask from "../Goals/CountTask";
 
 const mapStateToProps = state => {
     return {
@@ -23,7 +23,7 @@ function ConnectedDataView(props) {
             </div>}
             <div data-uk-sortable={"true"} className={"goals top-level"}>
                 {props.goals.map((el) => (
-                    <Task goal={el} key={el.uuid}>
+                    <Goal goal={el} key={el.uuid}>
                         {el.type === 'boolean' && (
                             <YesNoTask goal={el}/>
                         )}
@@ -36,7 +36,7 @@ function ConnectedDataView(props) {
                         {el.type === 'time_of_day' && (
                             <TimeOfDayTask goal={el}/>
                         )}
-                    </Task>
+                    </Goal>
                 ))}
                 {props.goals.length === 0 && (
                     <React.Fragment>
@@ -52,5 +52,5 @@ function ConnectedDataView(props) {
     );
 }
 
-const DataView = connect(mapStateToProps)(ConnectedDataView);
-export default DataView;
+const GoalList = connect(mapStateToProps)(ConnectedDataView);
+export default GoalList;

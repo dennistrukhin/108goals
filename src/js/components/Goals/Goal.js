@@ -10,7 +10,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-class ConnectedTask extends Component {
+class ConnectedGoal extends Component {
     constructor(props) {
         super(props);
         this.handleOpenDeleteGoalModal = this.handleOpenDeleteGoalModal.bind(this);
@@ -34,5 +34,5 @@ class ConnectedTask extends Component {
     }
 }
 
-const Task = connect(null, mapDispatchToProps)(ConnectedTask);
-export default Task;
+const Goal = connect(null, mapDispatchToProps)(ConnectedGoal);
+export default Goal;
