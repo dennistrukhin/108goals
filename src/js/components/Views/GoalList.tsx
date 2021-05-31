@@ -6,15 +6,21 @@ import TimeOfDayTask from "../Goals/TimeOfDayTask";
 import DateLabels from "./DateLabels";
 import XTimesAWeekTask from "../Goals/XTimesAWeekTask";
 import CountTask from "../Goals/CountTask";
+import {GoalInterface} from "../../types";
 
-const mapStateToProps = state => {
+interface DataViewProps {
+    goals: Array<GoalInterface<any>>,
+    offset: number,
+}
+
+const mapStateToProps = (state: DataViewProps) => {
     return {
         goals: state.goals,
         offset: state.offset,
     };
 };
 
-function ConnectedDataView(props) {
+function ConnectedDataView(props: DataViewProps) {
     return (
         <React.Fragment>
             {props.goals.length > 0 &&
@@ -22,7 +28,7 @@ function ConnectedDataView(props) {
                 <DateLabels/>
             </div>}
             <div data-uk-sortable={"true"} className={"goals top-level"}>
-                {props.goals.map((el) => (
+                {props.goals.map((el: GoalInterface<any>) => (
                     <Goal goal={el} key={el.uuid}>
                         {el.type === 'boolean' && (
                             <YesNoTask goal={el}/>

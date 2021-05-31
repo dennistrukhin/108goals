@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import GoalList from "./Views/GoalList";
 import {connect} from "react-redux";
 import {loadGoals} from "../actions";
@@ -8,12 +8,8 @@ import NewGoal from "./NewGoal/NewGoal";
 import AddActivity from "./Goals/AddActivity";
 import store from "../store";
 
-const mapStateToProps = state => {
-    return {};
-};
-
-function ConnectedApp(props) {
-    React.useEffect(() => store.dispatch(loadGoals()), []);
+function ConnectedApp() {
+    React.useEffect(() => {store.dispatch(loadGoals() as any)}, []);
 
     return (
         <Router.BrowserRouter>
@@ -31,5 +27,5 @@ function ConnectedApp(props) {
     );
 }
 
-const App = connect(mapStateToProps, {loadGoals})(ConnectedApp);
+const App = connect()(ConnectedApp);
 export default App;

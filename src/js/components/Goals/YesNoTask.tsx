@@ -2,14 +2,15 @@ import React from 'react';
 import {getPreviousDates} from "../../utils";
 import {connect} from "react-redux";
 import GoalResult from "./GoalResult";
+import {AppState, GoalProps} from "../../types";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: AppState) => {
     return {
         offset: state.offset,
     };
 };
 
-function ConnectedYesNoTask(props) {
+function ConnectedYesNoTask(props: GoalProps) {
     const dates = getPreviousDates(props.offset);
     const activity = props.goal.activity;
 

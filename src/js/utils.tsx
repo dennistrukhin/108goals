@@ -1,4 +1,4 @@
-function getDateLabels(offset) {
+function getDateLabels(offset: number) {
     let dateLabels = [];
     let rightmostDate;
     const days = [
@@ -24,7 +24,7 @@ function getDateLabels(offset) {
     return dateLabels;
 }
 
-function getPreviousDates(offset) {
+function getPreviousDates(offset: number) {
     let dates = [];
     let rightmostDate;
     for (let i = 6; i >= 0; i--) {
@@ -40,7 +40,7 @@ function getPreviousDates(offset) {
     return dates;
 }
 
-function offsetToDate(offset) {
+function offsetToDate(offset: number) {
     let d = new Date();
     d.setDate(d.getDate() - offset);
 

@@ -1,26 +1,27 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 import * as Router from 'react-router-dom';
 import {connect} from "react-redux";
 import {addGoal} from "../../actions";
 import {v1} from "uuid";
+import {GoalInterface, NewGoalProps, StoreDispatch} from "../../types";
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: StoreDispatch) {
     return {
-        addGoal: goal => dispatch(addGoal(goal))
+        addGoal: (goal: GoalInterface<any>) => dispatch(addGoal(goal))
     };
 }
 
-function ConnectedNewGoalXTimes(props) {
+const ConnectedNewGoalYesOrNo = (props: NewGoalProps) => {
     const [name, setName] = React.useState("");
-    const [hours, setHours] = React.useState(0);
-    const [minutes, setMinutes] = React.useState(0);
+    const [target, setTarget] = React.useState(true);
     const [success, setSuccess] = React.useState(false);
+
 
     function handleGoalCreate() {
         props.addGoal({
             name,
-            type: "time_of_day",
-            target: hours * 24 + minutes,
+            type: "boolean",
+            target,
             activity: {},
             uuid: v1(),
         });
@@ -43,19 +44,12 @@ function ConnectedNewGoalXTimes(props) {
                        placeholder="Enter your goal name here"/>
 
                 <label htmlFor="mgc-title">Target</label>
-                <input id="mgc-title"
-                       className={"two-digit"}
-                       type="text"
-                       value={hours}
-                       onChange={e => setHours(parseInt(e.target.value) || 0)}
-                       autoComplete={"off"}
-                       placeholder="Enter your goal target here"/> : <input id="mgc-title"
-                       type="text"
-                       className={"two-digit"}
-                       value={minutes}
-                       onChange={e => setMinutes(parseInt(e.target.value) || 0)}
-                       autoComplete={"off"}
-                       placeholder="Enter your goal target here"/>
+                <select id="mgc-target"
+                        value={target ? "1" : "0"}
+                        onChange={e => setTarget(e.target.value === '1')}>
+                    <option value={"1"}>Yes</option>
+                    <option value={"0"}>No</option>
+                </select>
                 <div className={"actions"}>
                     <Router.Link to={"/"} className={"uk-button uk-button-default"}>Cancel</Router.Link> <a className={"uk-button uk-button-primary"} onClick={handleGoalCreate}>Create</a>
                 </div>
@@ -64,5 +58,5 @@ function ConnectedNewGoalXTimes(props) {
     );
 }
 
-const NewGoalXTimes = connect(null, mapDispatchToProps)(ConnectedNewGoalXTimes);
-export default NewGoalXTimes;
+const NewGoalYesOrNo = connect(null, mapDispatchToProps)(ConnectedNewGoalYesOrNo);
+export default NewGoalYesOrNo;

@@ -2,14 +2,15 @@ import React from 'react';
 import {getPreviousDates} from "../../utils";
 import {connect} from "react-redux";
 import GoalResult from "./GoalResult";
+import {AppState, GoalProps} from "../../types";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: AppState) => {
     return {
         offset: state.offset,
     };
 };
 
-function ConnectedCountTask(props) {
+function ConnectedXTimesAWeekTask(props: GoalProps) {
     const dates = getPreviousDates(props.offset);
     const activity = props.goal.activity;
 
@@ -21,11 +22,13 @@ function ConnectedCountTask(props) {
                     goalId={props.goal.uuid}
                     empty={!(date in activity)}
                     date={date}
-                    value={date in activity ? activity[date].toString() : ''}/>
+                    value={date in activity ? activity[date]
+                        ? <span className="uk-label uk-label-success">YES</span>
+                        : <span className="uk-label uk-label-danger">NO</span> : ''}/>
             ))}
         </div>
     );
 }
 
-const CountTask = connect(mapStateToProps)(ConnectedCountTask);
-export default CountTask;
+const XTimesAWeekTask = connect(mapStateToProps)(ConnectedXTimesAWeekTask);
+export default XTimesAWeekTask;

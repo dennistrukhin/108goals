@@ -3,15 +3,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
-    entry: ['./src/index.js'],
+    entry: ['./src/index.tsx'],
     output: {
         path: __dirname + '/docs',
         publicPath: '/',
         filename: '[name].[contenthash].js',
         chunkFilename: '[id].[chunkhash].js',
     },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    },
     module: {
         rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,

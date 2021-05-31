@@ -1,16 +1,22 @@
 import {
     ADD_GOAL,
-    DELETE_GOAL, GOALS_LOADED,
+    GOALS_LOADED,
     SAVE_GOAL,
     SET_OFFSET
 } from "../constants/action-types";
+import {AppState} from "../types";
 
-const initialState = {
+const initialState: AppState = {
     goals: [],
     offset: 0
 };
 
-function rootReducer(state = initialState, action) {
+interface Action {
+    type: string,
+    payload: any,
+}
+
+function rootReducer(state = initialState, action: Action) {
     if (action.type === ADD_GOAL) {
         return Object.assign({}, state, {
             goals: state.goals.concat(action.payload)
@@ -19,12 +25,6 @@ function rootReducer(state = initialState, action) {
     if (action.type === SAVE_GOAL) {
         return Object.assign({}, state, {
             goals: state.goals.filter((g) => g.uuid !== action.payload.uuid).concat(action.payload)
-        });
-    }
-
-    if (action.type === DELETE_GOAL) {
-        return Object.assign({}, state, {
-            goals: state.goals.filter((g) => g.uuid !== action.uuid)
         });
     }
 

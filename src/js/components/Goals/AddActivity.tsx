@@ -3,20 +3,44 @@ import * as Router from 'react-router-dom';
 import {connect} from "react-redux";
 import {useState} from "react";
 import {saveGoal} from "../../actions";
+import store from "../../store";
+import {AppState, GoalActivity, GoalInterface} from "../../types";
 
-function mapDispatchToProps(dispatch) {
+const mapStateToProps = (state: AppState) => {
     return {
-        saveGoal: goal => dispatch(saveGoal(goal)),
+        goals: state.goals,
     };
 }
 
-function ConnectedAddActivity(props) {
-    const {goalId, date} = Router.useParams();
+function mapDispatchToProps(dispatch: typeof store.dispatch) {
+    return {
+        saveGoal: (goal: GoalInterface<any>) => dispatch(saveGoal(goal)),
+    };
+}
+
+interface AddActivityRouteParams {
+    goalId: string,
+    date: string,
+}
+
+interface AddActivityProps {
+    saveGoal: Function,
+    goals: Array<GoalInterface<any>>,
+}
+
+function ConnectedAddActivity(props: AddActivityProps) {
+    const {goalId, date} = Router.useParams() as AddActivityRouteParams;
     const dates = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',];
     const dateString = dates[parseInt(date.substr(5, 2)) - 1]
         + ' ' + date.substr(8, 2)
         + ', ' + date.substr(0, 4);
-    const goal = JSON.parse(window.localStorage.getItem('goal-' + goalId));
+    const goalArray = props.goals.filter(e => e.uuid === goalId);
+    const goal = goalArray[0] || new class implements GoalInterface<any> {
+        activity: GoalActivity<any>;
+        name: string;
+        type: string;
+        uuid: string;
+    };
 
     const [success, setSuccess] = useState(false);
     const [hours, setHours] = useState(
@@ -122,5 +146,5 @@ function ConnectedAddActivity(props) {
     );
 }
 
-const AddActivity = connect(null, mapDispatchToProps)(ConnectedAddActivity);
+const AddActivity = connect(mapStateToProps, mapDispatchToProps)(ConnectedAddActivity);
 export default AddActivity;

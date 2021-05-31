@@ -1,7 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
+import {GoalInterface} from "../../types";
 
-function ConnectedGoal(props) {
+interface ConnectedGoalProps {
+    goal: GoalInterface<any>,
+    children: Array<any>
+}
+
+function ConnectedGoal(props: ConnectedGoalProps) {
     return (
         <div className={"goal"}>
             <div className={"actions"}><span data-uk-icon="icon: more; ratio: 0.7"/></div>

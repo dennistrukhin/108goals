@@ -2,12 +2,11 @@ import {
     ADD_GOAL,
     DELETE_GOAL, GOALS_LOADED,
     SAVE_GOAL,
-    SET_ACTIVE_DATE,
-    SET_ACTIVE_GOAL_ID,
     SET_OFFSET
 } from "../constants/action-types";
+import {GoalInterface, StoreDispatch} from "../types";
 
-export function addGoal(payload) {
+export function addGoal(payload: GoalInterface<any>) {
     const str = localStorage.getItem('goals') || "[]";
     const goals = JSON.parse(str);
     goals.push(payload);
@@ -15,18 +14,18 @@ export function addGoal(payload) {
     return { type: ADD_GOAL, payload }
 }
 
-export function deleteGoal(id) {
+export function deleteGoal(id: string) {
     localStorage.removeItem('goal-' + id);
     return { type: DELETE_GOAL, uuid: id }
 }
 
-export function saveGoal(payload) {
+export function saveGoal(payload: any) {
     localStorage.setItem('goal-' + payload.uuid, JSON.stringify(payload));
     return { type: SAVE_GOAL, payload: payload }
 }
 
 export function loadGoals() {
-    return function(dispatch) {
+    return function(dispatch: StoreDispatch) {
         const payloadString = localStorage.getItem('goals') || "[]";
         const payload = JSON.parse(payloadString);
         dispatch({ type: GOALS_LOADED, payload: payload })
@@ -34,7 +33,7 @@ export function loadGoals() {
 }
 
 export function incDateOffset() {
-    return function (dispatch, getState) {
+    return function (dispatch: StoreDispatch, getState: Function) {
         const existingOffset = getState()['offset'];
         return dispatch({
             type: SET_OFFSET,
@@ -44,7 +43,7 @@ export function incDateOffset() {
 }
 
 export function decDateOffset() {
-    return function (dispatch, getState) {
+    return function (dispatch: StoreDispatch, getState: Function) {
         const existingOffset = getState()['offset'];
         if (existingOffset > 0) {
             return dispatch({

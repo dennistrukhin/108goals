@@ -1,24 +1,28 @@
 import React from 'react';
 import {getDateLabels} from "../../utils";
 import {connect} from "react-redux";
+import {DateLabel, GoalInterface, StoreDispatch} from "../../types";
 
-const mapStateToProps = state => {
+interface DateLabelsProps {
+    goals: Array<GoalInterface<any>>,
+    offset: number,
+}
+
+const mapStateToProps = (state: DateLabelsProps) => {
     return {
         goals: state.goals,
-        activeGoalId: state.activeGoalId,
-        activeDate: state.activeDate,
         offset: state.offset,
     };
 };
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: StoreDispatch) {
     return {
         // incDateOffset: () => dispatch(incDateOffset()),
         // decDateOffset: () => dispatch(decDateOffset()),
     };
 }
 
-function ConnectedDateLabels(props) {
+function ConnectedDateLabels(props: DateLabelsProps) {
 
     // const offsetInc = event => {
     //     props.incDateOffset();
@@ -37,7 +41,7 @@ function ConnectedDateLabels(props) {
             {/*    <a href="#" onClick={offsetInc}><span data-uk-icon="chevron-left"/></a>*/}
             {/*</div>*/}
 
-            {labels.map(label => (
+            {labels.map((label: DateLabel) => (
                 <div key={label.formatted} className={label.isHoliday ? 'holiday' : ''}>
                     <div className={'dow'}>{label.dow}</div>
                     <div className={'day'}>{label.day}</div>

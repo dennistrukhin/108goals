@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './js/components/App'
 import { Provider } from "react-redux";
 import store from "./js/store/index";
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
+import * as UIkit from 'uikit';
 import './css/style.less';
 import TagManager from 'react-gtm-module';
 
@@ -13,7 +12,6 @@ const tagManagerArgs = {
 };
 TagManager.initialize(tagManagerArgs);
 
-UIkit.use(Icons);
 
 ReactDOM.render(
     <Provider store={store}>
