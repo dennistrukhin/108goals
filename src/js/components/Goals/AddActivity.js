@@ -26,8 +26,15 @@ function ConnectedAddActivity(props) {
     const [minutes, setMinutes] = useState(
         goal.type === 'time_of_day'  && !!goal.activity[date]
             ? goal.activity[date] - 60 * hours
-            : 0
-    );
+            : 0);
+    const [count, setCount] = useState(
+        goal.type === 'count' && !!goal.activity[date]
+            ? goal.activity[date]
+            : 0);
+    const [yesNo, setYesNo] = useState(
+        (goal.type === 'boolean' || goal.type === 'x_times') && !!goal.activity[date]
+            ? goal.activity[date]
+            : false);
 
     function removeActivity() {
         delete goal.activity[date];
@@ -40,6 +47,13 @@ function ConnectedAddActivity(props) {
         switch (goal.type) {
             case 'time_of_day':
                 value = hours * 60 + minutes;
+                break;
+            case 'count':
+                value = count;
+                break;
+            case 'boolean':
+            case 'x_times':
+                value = yesNo;
                 break;
         }
         goal.activity[date] = value;
@@ -70,6 +84,28 @@ function ConnectedAddActivity(props) {
                                                                                 onChange={e => setMinutes(parseInt(e.target.value) || 0)}
                                                                                 autoComplete={"off"}
                                                                                 placeholder="Enter your goal target here"/>
+                </form>
+            )}
+            {goal.type === 'count' && (
+                <form>
+                    <input id="mgc-title"
+                           className={"two-digit"}
+                           type="text"
+                           value={count}
+                           onChange={e => setCount(parseInt(e.target.value) || 0)}
+                           autoComplete={"off"}
+                           placeholder="Enter your goal target here"/>
+                </form>
+            )}
+            {(goal.type === 'boolean' || goal.type === 'x_times') && (
+                <form>
+                    <select
+                           value={yesNo ? "1" : "0"}
+                           onChange={e => setYesNo(e.target.value === "1")}
+                           autoComplete={"off"}>
+                        <option value={"1"}>Yes</option>
+                        <option value={"0"}>No</option>
+                    </select>
                 </form>
             )}
 

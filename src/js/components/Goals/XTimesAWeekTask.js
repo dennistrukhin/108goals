@@ -21,7 +21,9 @@ function ConnectedXTimesAWeekTask(props) {
                     goalId={props.goal.uuid}
                     empty={!(date in activity)}
                     date={date}
-                    value={date in activity ? activity[date].toString() : ''}/>
+                    value={date in activity ? activity[date]
+                        ? <span className="uk-label uk-label-success">YES</span>
+                        : <span className="uk-label uk-label-danger">NO</span> : ''}/>
             ))}
         </div>
     );
